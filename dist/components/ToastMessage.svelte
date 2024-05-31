@@ -5,7 +5,7 @@
 	{#if typeof toast.message === 'string'}
 		{toast.message}
 	{:else}
-		<svelte:component this={toast.message} {toast} />
+		<svelte:component this={toast.message} {toast} {...toast.props} />
 	{/if}
 </div>
 

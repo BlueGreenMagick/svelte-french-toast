@@ -11,7 +11,11 @@ const createToast = (message, type = 'blank', opts) => ({
     },
     message,
     pauseDuration: 0,
-    ...opts,
+    icon: opts?.icon,
+    duration: opts?.duration,
+    iconTheme: opts?.iconTheme,
+    position: opts?.position,
+    props: opts?.props,
     id: opts?.id || genId()
 });
 const createHandler = (type) => (message, options) => {

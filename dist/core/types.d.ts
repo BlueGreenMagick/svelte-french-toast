@@ -8,7 +8,7 @@ export type ToastType = 'success' | 'error' | 'loading' | 'blank' | 'custom';
  * - Use `top-start` instead of `top-left`.
  * - Use `top-end` instead of `top-right`. */
 export type ToastPosition = 'top-left' | 'top-center' | 'top-right' | 'bottom-left' | 'bottom-center' | 'bottom-right' | 'top-start' | 'top-end' | 'bottom-start' | 'bottom-end';
-export type Renderable = typeof SvelteComponent<any> | string | null;
+export type Renderable<T extends Record<string, any> = Record<string, any>> = typeof SvelteComponent<T> | string | null;
 export interface IconTheme {
     primary: string;
     secondary: string;
@@ -16,14 +16,15 @@ export interface IconTheme {
 export type ValueFunction<TValue, TArg> = (arg: TArg) => TValue;
 export type ValueOrFunction<TValue, TArg> = TValue | ValueFunction<TValue, TArg>;
 export declare const resolveValue: <TValue, TArg>(valOrFunction: ValueOrFunction<TValue, TArg>, arg: TArg) => TValue;
-export interface Toast {
+export interface Toast<T extends Record<string, any> = Record<string, any>> {
     type: ToastType;
     id: string;
-    message: Renderable;
+    message: Renderable<T>;
     icon?: Renderable;
     duration?: number;
     pauseDuration: number;
     position?: ToastPosition;
+    props?: Omit<T, 'toast'>;
     ariaProps: {
         role: 'status' | 'alert';
         'aria-live': 'assertive' | 'off' | 'polite';
@@ -35,10 +36,10 @@ export interface Toast {
     visible: boolean;
     height?: number;
 }
-export type DOMToast = Toast & {
+export type DOMToast<T extends Record<string, any> = Record<string, any>> = Toast<T> & {
     offset: number;
 };
-export type ToastOptions = Partial<Pick<Toast, 'id' | 'icon' | 'duration' | 'ariaProps' | 'className' | 'style' | 'position' | 'iconTheme'>>;
+export type ToastOptions<T extends Record<string, any> = Record<string, any>> = Partial<Pick<Toast<T>, 'id' | 'icon' | 'duration' | 'ariaProps' | 'className' | 'style' | 'position' | 'iconTheme' | 'props'>>;
 export type DefaultToastOptions = ToastOptions & {
     [key in ToastType]?: ToastOptions;
 };

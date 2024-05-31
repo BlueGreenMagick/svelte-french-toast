@@ -6,11 +6,8 @@ export let toast;
 export let setHeight;
 let wrapperEl;
 onMount(() => {
-  updateHeight();
-});
-function updateHeight(...args) {
   setHeight(wrapperEl.getBoundingClientRect().height);
-}
+});
 $:
   top = toast.position?.includes("top") ? 0 : null;
 $:
@@ -19,8 +16,6 @@ $:
   factor = toast.position?.includes("top") ? 1 : -1;
 $:
   justifyContent = toast.position?.includes("center") && "center" || (toast.position?.includes("right") || toast.position?.includes("end")) && "flex-end" || null;
-$:
-  updateHeight(toast.message, toast.type, toast.icon, toast.style);
 </script>
 
 <div
