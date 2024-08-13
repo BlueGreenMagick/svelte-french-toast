@@ -4,13 +4,14 @@ import ToastBar from "./ToastBar.svelte";
 import ToastMessage from "./ToastMessage.svelte";
 export let toast;
 export let setHeight;
-let wrapperEl;
-onMount(() => {
-  updateHeight();
-});
-function updateHeight(...args) {
-  setHeight(wrapperEl.getBoundingClientRect().height);
+let clientHeight;
+function onHeightChange(clientHeight2) {
+  if (clientHeight2 === void 0)
+    return;
+  setHeight(clientHeight2);
 }
+$:
+  onHeightChange(clientHeight);
 $:
   top = toast.position?.includes("top") ? 0 : null;
 $:
@@ -19,12 +20,10 @@ $:
   factor = toast.position?.includes("top") ? 1 : -1;
 $:
   justifyContent = toast.position?.includes("center") && "center" || (toast.position?.includes("right") || toast.position?.includes("end")) && "flex-end" || null;
-$:
-  updateHeight(toast.message, toast.type, toast.icon, toast.style);
 </script>
 
 <div
-	bind:this={wrapperEl}
+	bind:clientHeight
 	class="wrapper"
 	class:active={toast.visible}
 	class:transition={!prefersReducedMotion()}

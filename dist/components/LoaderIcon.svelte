@@ -3,7 +3,7 @@
 export let secondary = "#e0e0e0";
 </script>
 
-<div style:--primary={primary} style:--secondary={secondary} />
+<div style:--primary={primary} style:--secondary={secondary}></div>
 
 <style>
 	div {

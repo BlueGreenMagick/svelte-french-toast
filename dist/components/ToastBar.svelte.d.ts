@@ -17,7 +17,7 @@ declare const __propDef: {
         default: {
             ToastIcon: typeof ToastIcon;
             ToastMessage: typeof ToastMessage;
-            toast: Toast;
+            toast: Toast<Record<string, any>>;
         };
     };
 };

@@ -6,7 +6,7 @@ declare function calculateOffset(toast: Toast, $toasts: Toast[], opts?: {
     defaultPosition?: ToastPosition;
 }): number;
 export default function useToaster(toastOptions?: ToastOptions): {
-    toasts: import("svelte/store").Writable<Toast[]>;
+    toasts: import("svelte/store").Writable<Toast<Record<string, any>>[]>;
     handlers: {
         startPause(): void;
         endPause(): void;

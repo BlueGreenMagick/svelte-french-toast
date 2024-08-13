@@ -6,7 +6,7 @@ interface State {
 }
 export declare const toasts: State['toasts'];
 export declare const pausedAt: State['pausedAt'];
-export declare function update(toast: Partial<Toast>): void;
+export declare function update(toast: Partial<Toast>, clearTimeout?: boolean): void;
 export declare function add(toast: Toast): void;
 export declare function upsert(toast: Toast): void;
 export declare function dismiss(toastId?: Toast['id']): void;
